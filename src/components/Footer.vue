@@ -18,3 +18,38 @@
     </router-link>
   </div>
 </template>
+
+
+<style lang="scss">
+  @import '../assets/style/common.scss';
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    height: px2rem(80px);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    z-index: 200;
+    .navItem {
+      flex-grow: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #777;
+      .navItem-icon {
+        font-size: px2rem(35px)
+      }
+      span {
+        font-size: px2rem(20px)
+      }
+    }
+    .router-link-active {
+      color: tomato;
+    }
+  }
+</style>

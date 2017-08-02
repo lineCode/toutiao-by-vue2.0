@@ -1,0 +1,30 @@
+// 字体的转换
+// dpr设备像素比DPR(devicePixelRatio)是默认缩放为100%的情况下，设备像素和CSS像素的比值
+// 例如: iPhone 是2.46 ;
+// 根据不同手机屏幕尺寸和dpr动态的改变根节点html的font-size大小
+// & 表示 在当前元素
+@mixin font-dpr ($font-size) {
+  font-size: $font-size;
+  [data-dpr="2"] & {
+    font-size: $font-size * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: $font-size * 3;
+  }
+}
+
+
+
+// px转换为rem
+// 通过sass的定义混合指令 @warn sass语法
+// unitless: Introspection函数 判断判断一个值是否带有单位
+// 如果没写单位 加个单位px 然后再次调用函数
+@function px2rem ($px, $base-font-size: 64px) {
+  @if unitless($px) {
+    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    @return px2rem($px * 1px);
+  } @else if unit($px) == rem {
+    @return $px;
+  }
+  @return ($px / $base-font-size) * 1rem;
+}

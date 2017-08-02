@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+// var vue-style-loader = require('vue-style-loader')
+// var css-loader = require('css-loader')
 
 module.exports = {
   entry: './src/main.js',
@@ -15,6 +17,9 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
+            // 处理sass和scss
+            // 'scss': 'vue-style-loader!css-loader!sass-loader',
+            // 'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
           }
           // other vue-loader options go here
         }
@@ -24,12 +29,29 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
+      {  
+        test: /\.css$/,  
+        include: [  
+          /src/,//表示在src目录下的css需要编译  
+          '/node_modules/iview/dist/styles/'   //增加此项  
+        ],  
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader'  
+      },  
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: ('fonts/[name].[hash:7].[ext]')
+        }        
       }
     ]
   },
